@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleta>
+    <opcion nombre="Protector texturizado transparente" color="#FF6B6B">Protector texturizado transparente</opcion>
+    <opcion nombre="Protector texturizado transp/naranja" color="#4ECDC4">Protector texturizado transp/naranja</opcion>
+    <opcion nombre="Protector liso negro" color="#45B7D1">Protector liso negro</opcion>
+    <opcion nombre="Protector liso rosa" color="#96CEB4">Protector liso rosa</opcion>
+    <opcion nombre="Protector liso transp/naranja" color="#FFEAA7">Protector liso transp/naranja</opcion>
+    <opcion nombre="Antivibrador Blister x8" color="#DDA0DD">Antivibrador Blister x8</opcion>
+    <opcion nombre="Antivibrador x8" color="#98D8C8">Antivibrador x8</opcion>
+    <opcion nombre="Zapatillero Neutro Grande" color="#F7DC6F">Zapatillero Neutro Grande</opcion>
+</ruleta>

@@ -1,0 +1,379 @@
+/* Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: #fff;
+}
+
+/* Contenedor Principal */
+.contenedor-principal {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Encabezado */
+.encabezado {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.encabezado h1 {
+    font-size: 3rem;
+    background: linear-gradient(90deg, #f39c12, #e74c3c, #9b59b6, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+}
+
+/* Contenido de la Ruleta */
+.contenido-ruleta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+
+/* Contenedor de la Ruleta */
+.ruleta-contenedor {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Flecha Ganadora */
+.flecha-ganadora {
+    font-size: 40px;
+    color: #e74c3c;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: parpadeo 1s ease-in-out infinite;
+}
+
+@keyframes parpadeo {
+    0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+}
+
+/* Canvas de la Ruleta */
+#ruletaCanvas {
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 10px rgba(255, 255, 255, 0.1),
+        0 0 0 20px rgba(243, 156, 18, 0.3),
+        0 0 50px rgba(243, 156, 18, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+#ruletaCanvas:hover {
+    box-shadow: 
+        0 0 0 10px rgba(255, 255, 255, 0.15),
+        0 0 0 20px rgba(243, 156, 18, 0.4),
+        0 0 60px rgba(243, 156, 18, 0.5),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón Central de la Ruleta */
+.btn-central {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 4px solid #f39c12;
+    background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 2px 10px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.btn-central:hover:not(:disabled) {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 
+        0 6px 25px rgba(243, 156, 18, 0.5),
+        inset 0 2px 10px rgba(255, 255, 255, 0.8);
+}
+
+.btn-central:active:not(:disabled) {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+.btn-central:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-central.girando {
+    animation: pulsarCentral 0.5s ease-in-out infinite;
+}
+
+@keyframes pulsarCentral {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.texto-suerte {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.texto-click {
+    font-size: 10px;
+    color: #e74c3c;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Panel de Control */
+.panel-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-carga {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.info-carga.exito {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.info-carga.error {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+/* Botones */
+.btn-recargar {
+    padding: 15px 40px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-recargar:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.icono-recargar {
+    font-size: 1.2rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.mostrar {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-contenido {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #f39c12, #e74c3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal-body {
+    margin: 30px 0;
+}
+
+.texto-ganador {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+    margin-bottom: 15px;
+}
+
+.nombre-ganador {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(231, 76, 60, 0.2));
+    border-radius: 15px;
+    border: 2px solid rgba(243, 156, 18, 0.5);
+    animation: celebrate 0.5s ease infinite;
+}
+
+@keyframes celebrate {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.detalle-ganador {
+    font-size: 1.1rem;
+    color: #95a5a6;
+}
+
+.modal-footer {
+    margin-top: 30px;
+}
+
+.btn-cerrar {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+.btn-cerrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+}
+
+/* Pie de Página */
+.pie-pagina {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .encabezado h1 {
+        font-size: 2rem;
+    }
+
+    #ruletaCanvas {
+        width: 300px;
+        height: 300px;
+    }
+
+    .flecha-ganadora {
+        font-size: 30px;
+    }
+
+    .btn-central {
+        width: 55px;
+        height: 55px;
+    }
+
+    .texto-suerte {
+        font-size: 11px;
+    }
+
+    .texto-click {
+        font-size: 8px;
+    }
+
+    .btn-recargar {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    .nombre-ganador {
+        font-size: 1.8rem;
+    }
+
+    .modal-contenido {
+        padding: 25px;
+    }
+}

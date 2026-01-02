@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta de la Suerte</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <header class="encabezado">
+            <h1>🎰 Ruleta de la Suerte</h1>
+            <p class="subtitulo">Gira para ganar!!</p>
+        </header>
+
+        <div class="contenido-ruleta">
+            <div class="ruleta-contenedor">
+                <div class="flecha-ganadora">▼</div>
+                <canvas id="ruletaCanvas" width="500" height="500"></canvas>
+                <button id="btnCentral" class="btn-central" disabled>
+                    <span class="texto-suerte">SUERTE</span>
+                    <span class="texto-click">¡CLICK!</span>
+                </button>
+            </div>
+
+            <div class="panel-control">
+                <div class="info-carga">
+                    <span id="estadoCarga">Cargando opciones...</span>
+                </div>
+                <button id="btnRecargar" class="btn-recargar">
+                    <span class="icono-recargar">🔄</span>
+                    Recargar XML
+                </button>
+            </div>
+        </div>
+
+        <div id="modalResultado" class="modal">
+            <div class="modal-contenido">
+                <div class="modal-header">
+                    <h2>🎉 ¡Felicidades!</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="texto-ganador">La suerte ha elegido:</p>
+                    <div id="nombreGanador" class="nombre-ganador"></div>
+                    <div id="detalleGanador" class="detalle-ganador"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCerrarModal" class="btn-cerrar">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pie-pagina">
+            <p>Tienda de Pádel</p>
+        </footer>
+    </div>
+
+    <script src="ruleta.js"></script>
+</body>
+</html>
